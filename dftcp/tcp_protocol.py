@@ -53,7 +53,7 @@ class DataforgeEnvelopeProtocol(asyncio.Protocol):
 
     def data_received(self, data):
         self.data += data
-        messages, self.data = env_parser.get_messages_from_stream(data)   
+        messages, self.data = env_parser.get_messages_from_stream(self.data)   
         
         for message in messages:
             self.process_message(message)
