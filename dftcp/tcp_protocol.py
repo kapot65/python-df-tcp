@@ -40,8 +40,9 @@ class DataforgeEnvelopeProtocol(asyncio.Protocol):
               "received message: ", message)
         self.send_message(message['meta'])
         
-    def send_message(self, meta, data=b''):
-        prep_message = env_parser.create_message(meta, data)
+    def send_message(self, meta: dict, data: bytearray=b'', 
+                     data_type: "binary_types"=0):
+        prep_message = env_parser.create_message(meta, data, data_type)
         self.transport.write(prep_message)
     
     def __init__(self, *args, **kwargs):
